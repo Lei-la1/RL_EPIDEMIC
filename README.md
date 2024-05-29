@@ -14,9 +14,9 @@ SRIV: Susceptible, Recovered, Infectious, Vaccinated
 
 ### Action Space
 The agent has a discrete set of five actions
-\[
-A = \{ \text{move right}, \text{move left}, \text{move up}, \text{move down}, \text{vaccinate} \}
-\]
+
+A = { move right, move left, move up, move down, vaccinate}
+
 
 ### Set up
 pip install -r requirements.txt
