@@ -1,4 +1,4 @@
-# RL_EPIDEMIC
+# RL_EPIDEMIC :syringe:
 
 ### Abstract 
 This project focuses on implementing a vaccination strategy using reinforcement learning to stop the spread of a disease. In our environment, an agent moves across a grid and decides whether to vaccinate individuals. The grid represents people who can be in one of four states: susceptible, infected, vaccinated, or recovered (SIRV). We employed various RL algorithms, including PPO, DQN, and REINFORCE, to observe the emergence of strategies. While we successfully solved the problem using PPO, we encountered more difficulties with DQN and REINFORCE.
