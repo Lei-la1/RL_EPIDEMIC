@@ -26,9 +26,6 @@ A = { move right, move left, move up, move down, vaccinate}
 To set up the project environment:
 
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/Lei-la1/RL_EPIDEMIC.git
-   ```
 2. Install the required dependencies:
    ```bash
    pip install -r requirements.txt
