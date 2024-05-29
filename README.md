@@ -12,5 +12,11 @@ SRIV: Susceptible, Recovered, Infectious, Vaccinated
 - (0,0,1,0) -> You are recovered, after being infectious, you cannot cannot pass on the disease 
 - (0,0,0,1) -> You are vaccinated, you cannot become infected and cannot propagate the disease
 
+### Action Space
+The agent has a discrete set of five actions
+\[
+A = \{ \text{move right}, \text{move left}, \text{move up}, \text{move down}, \text{vaccinate} \}
+\]
+
 ### Set up
 pip install -r requirements.txt
