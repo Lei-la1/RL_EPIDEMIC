@@ -1,6 +1,6 @@
 # RL_EPIDEMIC :syringe:
 
-### Abstract 
+### Project overview
 This project focuses on implementing a vaccination strategy using reinforcement learning to stop the spread of a disease. In our environment, an agent moves across a grid and decides whether to vaccinate individuals. The grid represents people who can be in one of four states: susceptible, infected, vaccinated, or recovered (SIRV). We employed various RL algorithms, including PPO, DQN, and REINFORCE, to observe the emergence of strategies. While we successfully solved the problem using PPO, we encountered more difficulties with DQN and REINFORCE.
 
 ### Environment
@@ -23,4 +23,24 @@ A = { move right, move left, move up, move down, vaccinate}
 
 
 ### Set up
-pip install -r requirements.txt
+To set up the project environment:
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Lei-la1/RL_EPIDEMIC.git
+   ```
+2. Install the required dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+
+### Usage
+## Usage
+To run a specific algorithm, use the corresponding script. Add the necessary argumentsdepending on the usage. For example, to run the PPO algorithm:
+
+```bash
+python ppo.py
+```
+
+Replace `ppo.py` with `dqn.py` or `reinforce.py` to run the respective algorithms.
