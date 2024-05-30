@@ -39,7 +39,7 @@ def create_observation_space(grid_size, window_size):
 class GridWorldEnv(gym.Env):
     metadata = {"render_modes": ["human", "rgb_array"], "render_fps": 4}
 
-    def __init__(self, render_mode=None, max_iterations = 200, size=10, init_infect = 1, window_size=3,num_infect=1, infect_prob = 0.5, recov_prob = 0.1, num_states = 4, days = 3, max_vaccine=20,n_vaccine=20, decay_steps=60000, decay_amount=5, random=True):
+    def __init__(self, render_mode=None, max_iterations = 200, size=10, init_infect = 1, window_size=3,num_infect=1, infect_prob = 0.5, recov_prob = 0.1, num_states = 4, days = 3, max_vaccine=20,n_vaccine=20, decay_steps=60000, decay_amount=5, random=False):
         
         self.size = size 
         window_size = size  # Grid size
@@ -148,9 +148,9 @@ class GridWorldEnv(gym.Env):
         #Initialize the grid with some disease states --> only 0 and 1
         self.grid = grid
 
-        observation = self.observations().astype(np.int32)  # Cast to int32
+        #observation = self.observations().astype(np.int32)  # Cast to int32
         #observation = self.observations2()
-        #observation = self.get_centered_observation().astype(np.int32)
+        observation = self.get_centered_observation().astype(np.int32)
         info = self.info()
 
         #Reset variables
@@ -280,6 +280,10 @@ class GridWorldEnv(gym.Env):
         # An episode is done iff the agent has reached the target or max number of iterations
         truncated = self.current_iteration >= self.max_iterations
         
+        #future_infected_count = self.look_ahead_simulation(steps=3)
+        #look_ahead_reward = -future_infected_count/100 *5
+        
+        
         #Compute disease propagation
         if truncated or terminated:
             self.update_grid()
@@ -287,15 +291,19 @@ class GridWorldEnv(gym.Env):
 
         if truncated or terminated:
             final_reward = self.reward()
+            #final_reward = self.simple_reward()
         else:
             final_reward = 0
         
         # Combine intermediate reward with final reward
-        reward = intermediate_reward + final_reward
+        #reward = intermediate_reward + final_reward # more complex reward function
+        #reward = final_reward + look_ahead_reward   
+        reward = final_reward # simpler reward function
 
         #Update observation
-        observation = self.observations().astype(np.int32)
+        #observation = self.observations().astype(np.int32)
         #observation = self.observations2()
+        observation = self.get_centered_observation().astype(np.int32)
         if self.render_mode == "human":
             self.render_frame()
         
@@ -371,16 +379,19 @@ class GridWorldEnv(gym.Env):
             channels_matrix[S] = channels_matrix[S] - (channels_matrix[S] * channels_matrix[I])
             self.grid = np.argmax(channels_matrix, axis=0)
 
-    def look_ahead_simulation(self, steps=2):
-        """Perform a look-ahead simulation to estimate future state."""
+    def look_ahead_simulation(self, steps=3):
+        """Perform a look-ahead simulation to estimate future infection count."""
         original_state = self.clone_state()
         
+        # Simulate disease propagation for the specified number of steps
         self.simulate_disease_propagation(steps)
-        estimated_future_state = self.clone_state()
+            
+        future_infected_count = np.sum(self.grid == I)
         
+        # Restore the original state
         self.restore_state(original_state)
         
-        return estimated_future_state
+        return future_infected_count
 
     
     
@@ -455,6 +466,11 @@ class GridWorldEnv(gym.Env):
         vaccination_cost = (self.state_counts[V]*10)**2
         reward -= self.state_counts[I]*30
         reward-=vaccination_cost
+
+        return reward
+    
+    def simple_reward(self): 
+        reward = -self.state_counts[I]*30
 
         return reward
     

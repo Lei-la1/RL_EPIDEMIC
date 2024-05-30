@@ -125,6 +125,7 @@ class Args:
     """the maximum norm for the gradient clipping"""
     target_kl: float = None
     """the target KL divergence threshold"""
+    reward: str = "final+centered"
 
     # to be filled in runtime
     batch_size: int = 0
@@ -193,6 +194,7 @@ if __name__ == "__main__":
     if args.track:
         import wandb
         tags = args.tags.split(',') if args.tags else []
+        wandb.login(key='4ad67c4fbf069317f2f88cd0a691a523519a3617')
         wandb.init(
             project="rl-vaccination", entity="rl-project-lma",
             sync_tensorboard=True,
