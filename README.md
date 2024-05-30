@@ -1,4 +1,3 @@
-````markdown
 # RL_EPIDEMIC :syringe:
 
 ## Project Overview
@@ -44,11 +43,11 @@ Ensure you have the following installed:
 ### Installation
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/yourusername/RL_EPIDEMIC.git
    cd RL_EPIDEMIC
    ```
-````
 
 2. Install the required dependencies:
    ```bash
