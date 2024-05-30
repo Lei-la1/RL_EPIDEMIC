@@ -1,51 +1,102 @@
+````markdown
 # RL_EPIDEMIC :syringe:
 
-### Project overview
+## Project Overview
 
-This project focuses on implementing a vaccination strategy using reinforcement learning to stop the spread of a disease. In our environment, an agent moves across a grid and decides whether to vaccinate individuals. The grid represents people who can be in one of four states: susceptible, infected, vaccinated, or recovered (SIRV). We employed various RL algorithms, including PPO, DQN, and REINFORCE, to observe the emergence of strategies. While we successfully solved the problem using PPO, we encountered more difficulties with DQN and REINFORCE.
+This project aims to develop and implement a vaccination strategy using reinforcement learning to halt the spread of a disease. Our environment is a grid-based representation of individuals who can be in one of four states: susceptible, infected, vaccinated, or recovered (SIRV). We experimented with several RL algorithms, including PPO, DQN, and REINFORCE, to observe the emergence of effective strategies. While PPO successfully solved the problem, DQN and REINFORCE posed more challenges.
 
-### Environment
+## Environment
 
-The environment is the GridWorldEnv in `EPIDEMIC/envs/GridWorldEnv.py`
+The environment is implemented in the GridWorldEnv, located in `EPIDEMIC/envs/GridWorldEnv.py`.
 
-The environment is represented as a three-dimensional grid with dimensions corresponding to channels (C), height (H), and width (W). Each cell within this grid can occupy one of four possible states: susceptible (S), infected (I), recovered (R), or vaccinated (V). We use four channels to encode the state of each cell.
+### Grid Representation
 
-SRIV: Susceptible, Recovered, Infectious, Vaccinated
+The environment is a three-dimensional grid with dimensions representing channels (C), height (H), and width (W). Each cell in this grid can be in one of four states, encoded across four channels:
 
-- (1,0,0,0) -> You are susceptible, you can get the disease and need vaccination
-- (0,1,0,0) -> You are infectious and sick, you can pass on the disease to your neighbors, its too late for vaccination
-- (0,0,1,0) -> You are recovered, after being infectious, you cannot cannot pass on the disease
-- (0,0,0,1) -> You are vaccinated, you cannot become infected and cannot propagate the disease
+- **Susceptible (S)**: (1, 0, 0, 0) - Susceptible individuals can contract the disease and need vaccination.
+- **Infected (I)**: (0, 1, 0, 0) - Infected individuals can spread the disease to neighbors; it's too late for vaccination.
+- **Recovered (R)**: (0, 0, 1, 0) - Recovered individuals cannot pass on the disease.
+- **Vaccinated (V)**: (0, 0, 0, 1) - Vaccinated individuals are immune and cannot spread the disease.
 
-#### Action Space
+### Action Space
 
-The agent has a discrete set of five actions
+The agent can perform five discrete actions:
 
-A = { move right, move left, move up, move down, vaccinate}
+- Move right
+- Move left
+- Move up
+- Move down
+- Vaccinate
 
-# Run history
+## Run History
 
-You can find all the runs done during this project [here](https://wandb.ai/andreamiele/EPIDEMIC_RL?nw=nwuserandreamiele).
-A report with the important plots is available [here](https://wandb.ai/andreamiele/EPIDEMIC_RL/reports/Report--Vmlldzo4MTU1OTcy).
+You can find all the runs and detailed logs of this project on [Weights & Biases](https://wandb.ai/andreamiele/EPIDEMIC_RL?nw=nwuserandreamiele). A report summarizing the key plots and findings is available [here](https://wandb.ai/andreamiele/EPIDEMIC_RL/reports/Report--Vmlldzo4MTU1OTcy).
 
-### Set up
+## Setup
 
-To set up the project environment:
+### Prerequisites
+
+Ensure you have the following installed:
+
+- Python 3.6+
+- Pip
+
+### Installation
 
 1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/RL_EPIDEMIC.git
+   cd RL_EPIDEMIC
+   ```
+````
+
 2. Install the required dependencies:
    ```bash
    pip install -r requirements.txt
    ```
 
-### Usage
-
 ## Usage
 
-To run a specific algorithm, use the corresponding script. Add the necessary argumentsdepending on the usage. For example, to run the PPO algorithm:
+To run a specific algorithm, use the corresponding script and add the necessary arguments. For example, to run the PPO algorithm:
 
 ```bash
 python ppo.py
 ```
 
 Replace `ppo.py` with `dqn.py` or `reinforce.py` to run the respective algorithms.
+
+## Project Structure
+
+```
+RL_EPIDEMIC/
+│
+├── envs/
+│   └── GridWorldEnv.py     # Environment implementation
+│
+├── ppo.py              # PPO algorithm implementation
+│── dqn.py              # DQN algorithm implementation
+│── reinforce.py        # REINFORCE algorithm implementation
+│
+├── plot/
+│   └── ... .csv                 # Data for plotting for the final report
+│   └── plotting.ipynb           # Notebook for plotting for the final report
+│
+├── requirements.txt        # Required dependencies
+├── README.md               # Project overview
+```
+
+## Contributing
+
+Contributions are welcome! Please submit a pull request or open an issue to discuss your ideas.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+---
+
+For more detailed information and documentation, please refer to the project's main repository and associated documentation files.
+
+```
+
+```
