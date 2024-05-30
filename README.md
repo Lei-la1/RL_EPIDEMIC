@@ -1,28 +1,35 @@
 # RL_EPIDEMIC :syringe:
 
 ### Project overview
+
 This project focuses on implementing a vaccination strategy using reinforcement learning to stop the spread of a disease. In our environment, an agent moves across a grid and decides whether to vaccinate individuals. The grid represents people who can be in one of four states: susceptible, infected, vaccinated, or recovered (SIRV). We employed various RL algorithms, including PPO, DQN, and REINFORCE, to observe the emergence of strategies. While we successfully solved the problem using PPO, we encountered more difficulties with DQN and REINFORCE.
 
 ### Environment
+
 The environment is the GridWorldEnv in `EPIDEMIC/envs/GridWorldEnv.py`
 
-The environment is represented as a three-dimensional grid with dimensions corresponding to channels (C), height (H), and width (W). Each cell within this grid can occupy one of four possible states: susceptible (S), infected (I), recovered (R), or vaccinated (V). We use four channels to encode the state of each cell. 
+The environment is represented as a three-dimensional grid with dimensions corresponding to channels (C), height (H), and width (W). Each cell within this grid can occupy one of four possible states: susceptible (S), infected (I), recovered (R), or vaccinated (V). We use four channels to encode the state of each cell.
 
-SRIV: Susceptible, Recovered, Infectious, Vaccinated 
+SRIV: Susceptible, Recovered, Infectious, Vaccinated
+
 - (1,0,0,0) -> You are susceptible, you can get the disease and need vaccination
 - (0,1,0,0) -> You are infectious and sick, you can pass on the disease to your neighbors, its too late for vaccination
-- (0,0,1,0) -> You are recovered, after being infectious, you cannot cannot pass on the disease 
+- (0,0,1,0) -> You are recovered, after being infectious, you cannot cannot pass on the disease
 - (0,0,0,1) -> You are vaccinated, you cannot become infected and cannot propagate the disease
 
 #### Action Space
+
 The agent has a discrete set of five actions
 
 A = { move right, move left, move up, move down, vaccinate}
 
+# Run history
 
-
+You can find all the runs done during this project [here](https://wandb.ai/andreamiele/EPIDEMIC_RL?nw=nwuserandreamiele).
+A report with the important plots is available [here](https://wandb.ai/andreamiele/EPIDEMIC_RL/reports/Report--Vmlldzo4MTU1OTcy).
 
 ### Set up
+
 To set up the project environment:
 
 1. Clone the repository:
@@ -31,9 +38,10 @@ To set up the project environment:
    pip install -r requirements.txt
    ```
 
-
 ### Usage
+
 ## Usage
+
 To run a specific algorithm, use the corresponding script. Add the necessary argumentsdepending on the usage. For example, to run the PPO algorithm:
 
 ```bash
